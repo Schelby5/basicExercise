@@ -268,6 +268,8 @@ int main()
 	//same.Print();
 	//std::cout << std::endl;
 
+	std::cout << "ovo je promjena" << std::endl;
+
 	std::cin >> sum;
 	std::cout << sum << std::endl; //omoguæiti æe da proradi ovaj kod
 
