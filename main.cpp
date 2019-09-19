@@ -1,228 +1,275 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <math.h>
 
-//logièki operatori
-// == - ispitivanje jednakosti
-// && - logièki operator AND
-// || - logièki operator OR
-// ^^ - logièki XOR
-// < - operator LESS THAN
-// > - operator GREATER THAN
-// <= - operator LESS THAN OR EQUAL
-// >= - operator GREATER THAN OR EQUAL
-// != - different THAN
-
-//namespace exercise
-
-namespace machina
+class Vector3
 {
-	void cout(const char* value)
+public:
+	Vector3()
 	{
-		std::cout << value << std::endl;;
+		x = 0;
+		y = 0;
+		z = 0;
 	}
-}
 
-/*
-object
-|_object
-	|_object
-		|_object
-*/
-
-/* rješi zadatak
-1
-11
-111
-1111
-11111
-111111
-1111111
-*/
-
-//int sum = 0;
-//for (int val = 1; val <= 10; val++)
-//{
-//	std::cout << "Vrijednost val " << val << std::endl;;
-//	sum += val;
-//	std::cout << "Vrijednost brojeva " << sum << std::endl;;
-//
-//}
-//std::cout << "Vrijednost brojeva od 1 do 10 je " << sum << std::endl;;
-
-//int Stairs(int max)
-//{
-//	int sum = 0;
-//	int var = 0;
-//	int broj = 0;
-//	while (var <= max)
-//	{
-//		
-//		sum = broj * 10 + 1;
-//		broj = pow(10, var);
-//		std::cout << "Vrijednost broja --------- "<<broj << std::endl;;
-//		var++;
-//		std::cout << var << std::endl;;
-//		std::cout << "Vrijednost sume je " << sum << std::endl;;
-//		
-//	}
-//	std::cout << sum << std::endl;;
-//	return sum;
-//}
-
-
-
-
-void PrintNumbers(int iterator, int count)
-{
-	if (iterator < count)
+	Vector3(int xPos, int yPos, int zPos)
 	{
-		std::cout << iterator << std::endl;;
-		++iterator;
-		PrintNumbers(iterator, count);
+		x = xPos;
+		y = yPos;
+		z = zPos;
+		floatingMember = 33.33f;
 	}
-}
+	int x, y, z;
 
-void FibonacciArray(int max, int count = 0, int previous = 0, int current = 1)
-{
-	if (count == 0)
+	~Vector3()
 	{
-		std::cout << count << " : " << current << std::endl;;
+		std::cout << "Unistio sam se!" << std::endl;
 	}
-	if (count < max - 1)
+
+	Vector3 operator+(Vector3 second)
 	{
-		int nextNumber = previous + current;
-		std::cout << count + 1 << " : " << nextNumber << std::endl;;
-		previous = current;
-		++count;
-		FibonacciArray(max, count, previous, nextNumber);
-	}
-}
-
-void PrintMessage()
-{
-	std::cout << "Vrijednost numbera nije jednaka " << std::endl;;
-	std::cout << "Ovo je poruka sa std namespace" << std::endl;;
-}
-
-int Sum(int numberOne, int numberTwo)
-{
-	int result = numberOne + numberTwo;
-	std::cout << "Rezultat zbrajanja " << numberOne << " i " << numberTwo << " je " << numberOne + numberTwo << std::endl;;
-	return result;
-}
-
-int Substract(int numberOne, int numberTwo)
-{
-	int result = numberOne - numberTwo;
-	std::cout << "Rezultat oduzimanja " << numberOne << " i " << numberTwo << " je " << numberOne - numberTwo << std::endl;;
-	return result;
-}
-
-
-int Divide(int numberOne, int numberTwo)
-{
-	if (numberTwo != 0)
-	{
-		std::cout << "Rezultat dijeljenja " << numberOne << " i " << numberTwo << " je " << numberOne / numberTwo << std::endl;;
-		int result = numberOne / numberTwo;
+		Vector3 result;
+		result.x = x + second.x;
+		result.y = y + second.y;
+		result.z = z + second.z;
 		return result;
 	}
-	std::cout << "Ne može se dijeliti s nulom " << std::endl;;
-	return -1;
-}
 
-int Multiply(int numberOne, int numberTwo)
+	Vector3 operator-(Vector3 third)
+	{
+		Vector3 result2;
+		result2.x = x - third.x;
+		result2.y = y - third.y;
+		result2.z = z - third.z;
+		return result2;
+	}
+
+	Vector3 operator*(Vector3 fourth)
+	{
+		Vector3 result3;
+		result3.x = x * fourth.x;
+		result3.y = y * fourth.y;
+		result3.z = z * fourth.z;
+		return result3;
+	}
+	Vector3 operator/(Vector3 fifth)
+	{
+		Vector3 result4;
+		result4.x = x / fifth.x;
+		result4.y = y / fifth.y;
+		result4.z = z / fifth.z;
+		return result4;
+	}
+
+	bool operator==(Vector3 second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	bool operator!=(Vector3 second)
+	{
+		if (x == second.x && y == second.y && z == second.z)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	int SumOfCoordinates()
+	{
+		return x + y + z;
+	}
+
+	void Print()
+	{
+		std::cout << "[" << x << ", " << y << ", " << z << "]" << std::endl;
+	}
+
+	float GetFloatingMember()
+	{
+		return floatingMember;
+	}
+	//DZ:
+	//Overloadat operators ++, --, *=, /=
+	//overloadat cout i cin, operator << i operator >>
+
+	friend std::ostream & operator << (std::ostream &output, const Vector3 &value)
+	{
+		output << "[" << value.x << ", " << value.y << ", " << value.z << "]";
+		return output;
+	}
+
+	friend std::istream & operator >> (std::istream &input, Vector3 &value)
+	{
+		bool error = false;
+		while (error != true)
+		{
+			std::cout << "Enter value X: ";
+			if (!(input >> value.x))
+			{
+				error = false;
+			}
+			else
+			{
+				error = true;
+			}
+			std::cout << std::endl;
+			//error = input.bad();
+			input.clear();
+			input.ignore(10000, '\n');
+			//input.ignore(std::numeric_limits < std::streamsize>::max, '\n');
+		}
+
+		bool error2 = false;
+		while (error2 != true)
+		{
+			std::cout << "Enter value Y: ";
+			if (!(input >> value.y))
+			{
+				error2 = false;
+			}
+			else
+			{
+				error2 = true;
+			}
+			std::cout << std::endl;
+			//error = input.bad();
+			input.clear();
+			input.ignore(10000, '\n');
+			//input.ignore(std::numeric_limits < std::streamsize>::max, '\n');
+		}
+
+		bool error3 = false;
+		while (error3 != true)
+		{
+			std::cout << "Enter value Z: ";
+			if (!(input >> value.z))
+			{
+				error3 = false;
+			}
+			else
+			{
+				error3 = true;
+			}
+			std::cout << std::endl;
+			//error = input.bad();
+			input.clear();
+			input.ignore(10000, '\n');
+			//input.ignore(std::numeric_limits < std::streamsize>::max, '\n');
+		}
+
+		return input;
+		/*input >> value.x >> value.y >> value.z;*/
+	}
+
+private:
+	float floatingMember;
+};
+
+
+void iterate(int *arr) //ovdje int odreðuje da se poveæa za 4 bytea
 {
-	std::cout << "Rezultat množenja " << numberOne << " i " << numberTwo << " je " << numberOne * numberTwo << std::endl;;
-	int result = numberOne * numberTwo;
-	return result;
+	for (int i = 0; i < 3; i++)
+	{
+		std::cout << *arr << std::endl;
+		arr++;
+	}
+	//std::cout << i << std::endl; - i is out of scope and no longer exists!
 }
-
-/*
-   0    1   2    3
-| 115 | 5 | 6 | 10 |
-*/
-
-
-
 
 int main()
 {
-	//int twoDimensionalArray[3][3] =
-	//{	// y os
-	//	{1, 5, 7}, //x os
-	//	{8, 3, 9},
-	//	{2, 4, 6}
+	int number = 10;
+	int number2 = 3;
+	int* ref = &number;
+	int** doubleRef = &ref;
 
-	//};
+	float fNumber = 10.5f;
+	float* fRef = &fNumber;
+	*ref = 30;
+	int& refference = number; //zapisana samo adresa od našeg numbera
+	refference = number2;
 
-	//for (int i = 0; i < 3; i++)
+
+	int* ptr = &number;
+	std::cout << *ptr << std::endl;
+
+	ptr = &number2;
+	std::cout << *ptr << std::endl;
+
+	Vector3 person = Vector3(10, 20, 30);
+	std::cout << "Sum of person coordinates: " << person.SumOfCoordinates() << std::endl;
+	std::cout << "Person's coordinate x: " << person.x << std::endl;
+	std::cout << "Person's coordinate y: " << person.y << std::endl;
+	std::cout << "Person's coordinate z: " << person.z << std::endl;
+
+	std::cout << "Person's floatingMember value is: " << person.GetFloatingMember() << std::endl;
+
+
+	void* personPtr = &person;
+
+	std::cout << ref << std::endl;
+	std::cout << ptr << std::endl;
+	std::cout << *ref << std::endl;
+
+	int arr[] = { 1, 7, 3 };
+	iterate(arr);
+	std::cout << "Double reference: " << std::endl;
+	std::cout << "Double reference address: " << doubleRef << std::endl;
+	std::cout << "Double reference value: " << *doubleRef << std::endl;
+	std::cout << "Reference address: " << ref << std::endl;
+	std::cout << "Referenece value: " << *ref << std::endl;
+	std::cout << "Double reference refference value: " << **doubleRef << std::endl;
+
+	{
+		Vector3 position = Vector3(1, 2, 3);
+	}
+	std::cout << "Position vector je van scopea!" << std::endl;
+
+	Vector3 playerPosition = Vector3(35, 28, 13);
+	Vector3 playerTwoPosition = Vector3(100, 100, 100);
+
+	Vector3 sum = playerPosition + playerTwoPosition;
+	std::cout << "vrijednost sum vectora je: ";
+	sum.Print();
+	std::cout << std::endl;
+
+
+	Vector3 substract = playerPosition - playerTwoPosition;
+	std::cout << "vrijednost substract vectora je: ";
+	substract.Print();
+	std::cout << std::endl;
+
+
+	Vector3 multiply = playerPosition * playerTwoPosition;
+	std::cout << "vrijednost multiply vectora je: ";
+	multiply.Print();
+	std::cout << std::endl;
+
+	Vector3 divide = playerPosition / playerTwoPosition;
+	std::cout << "vrijednost divide vectora je: ";
+	divide.Print();
+	std::cout << std::endl;
+
+	//Vector3 different = playerPosition == playerTwoPosition;
+	//if(playerPosition == playerTwoPosition)
 	//{
-	//	for (int j= 0; j < 3; j++)
-	//	{
-	//		std::cout << "[" << twoDimensionalArray[i][j] << "]";
-	//	}
-	//	std::cout << std::endl;;
 	//}
+	//std::cout << "vrijednost razlicito je vectora je: ";
+	//different.Print();
+	//std::cout << std::endl;
 
-	//int threeDimensionalArray[3][3][3] =
-	//{	
-	//	{
-	//		{1, 5, 7}, 
-	//		{8, 3, 9},
-	//		{2, 4, 6}
-	//	},
-	//	{
-	//		{10, 50, 70}, 
-	//		{80, 30, 90},
-	//		{20, 40, 60}
-	//	},
-	//	{
-	//		{100, 500, 700}, 
-	//		{800, 300, 900},
-	//		{200, 400, 600}
-	//	},
+	//Vector3 same = playerPosition != playerTwoPosition;
+	//std::cout << "vrijednost razlicito je vectora je: ";
+	//same.Print();
+	//std::cout << std::endl;
 
-	//};
+	std::cin >> sum;
+	std::cout << sum << std::endl; //omoguæiti æe da proradi ovaj kod
 
-	//std::cout << threeDimensionalArray[1][2][0] << std::endl;;
-
-	int squareMatrix [4][4] =
-	{
-		{  9, -2,  8,  2 }, 
-		{ -6, -2, 10, -9 },
-		{  4,  5,  6,  1 },
-		{  5,  3,  4,  9 }
-	};
-
-	int leftDiagonal = 0;
-	int rightDiagonal = 0;
-	int size = 4;
-	for (int i = 0; i < 4; i++)
-	{
-		leftDiagonal += squareMatrix[i][i];
-		rightDiagonal += squareMatrix[--size][i]; //size - 1 - i
-	}
-
-	/*int rightDiagonal = 0;
-	for (int j = 3; j >= 0; j--)
-	{
-		rightDiagonal += squareMatrix[j][j];
-	}*/
-
-	if (leftDiagonal == rightDiagonal)
-	{
-		std::cout << "Matrica je najljepsa " << std::endl;;
-	}
-	else
-	{
-		std::cout << "matrica je loša " << std::endl;;
-	}
-
-	machina::cout("Machina output string");
-	/*std::cout << twoDimensionalArray[0][2] << std::endl;;*/
-	std::cin.get();
+	system("pause");
 }
-
