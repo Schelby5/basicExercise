@@ -1,6 +1,5 @@
 #include "Vehicle.h"
 
-
 Vehicle::Vehicle()
 {
 	_wheels = 4;
