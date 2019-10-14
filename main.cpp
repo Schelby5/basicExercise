@@ -10,26 +10,55 @@
 //}
 
 #include <iostream>
-#include <string>
+
+//for (int i = 1; i <= number1; ++i) 
+	//{
+	//	sum1 += number1 % 10;
+	//	number1 = number1 / 10;
+	//}
+
+	//for (int j = 1; j <= number2; ++j)
+	//{
+	//	sum2 += number2 % 10;
+	//	number2 = number2 / 10;
+	//}
 
 int main()
 {
-	int i = 1;
-	for (; ; i++)
+	int number1 = 0;
+	int number2 = 0;
+	int sum1 = 0;
+	int sum2 = 0;
+	int broj1 = 0;
+	int broj2 = 0;
+
+	std::cout << "Upisi dva pozitivna cijela broja " << std::endl;
+	std::cin >> number1 >> number2;
+
+	broj1 = number1;
+	broj2 = number2;
+
+	if (number1 > 0 && number2 > 0)
 	{
-		bool ivanovaCigareta = true;
-		for (int j = 1; j <= 4; ++j)
+		while (number1 > 0)
 		{
-			if (i % j != 0)
-			{
-				ivanovaCigareta = false;
-				break;
-			}
+			sum1 += number1 % 10;
+			number1 /= 10;
 		}
-		if (ivanovaCigareta == true)
+		while (number2 > 0)
 		{
-			std::cout << i << std::endl;
-			break;
+			sum2 += number2 % 10;
+			number2 /= 10;
+		}
+		if (sum1 == sum2)
+		{
+			std::cout << "Brojevi " << broj1 << " i " << broj2 << " imaju isti broj znamenki " << sum1 << std::endl;
+		}
+		else
+		{
+			std::cout << "Brojevi " << broj1 << " i " << broj2 << " nemaju isti broj znamenki " << std::endl;
 		}
 	}
+
+	system("pause");
 }
