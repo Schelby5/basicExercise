@@ -1,51 +1,20 @@
 #include <iostream>
 
-//for (int i = 1; i <= number1; ++i) 
-	//{
-	//	sum1 += number1 % 10;
-	//	number1 = number1 / 10;
-	//}
-
-	//for (int j = 1; j <= number2; ++j)
-	//{
-	//	sum2 += number2 % 10;
-	//	number2 = number2 / 10;
-	//}
+typedef unsigned int uint32;
 
 int main()
 {
-	int number1 = 0;
-	int number2 = 0;
-	int sum1 = 0;
-	int sum2 = 0;
-	int broj1 = 0;
-	int broj2 = 0;
+	unsigned int arr[] = { 10, 17, 13, 15 };
+	int size = sizeof(arr) / sizeof(uint32);
+	int number = 0;
 
-	std::cout << "Upisi dva pozitivna cijela broja " << std::endl;
-	std::cin >> number1 >> number2;
-
-	broj1 = number1;
-	broj2 = number2;
-
-	if (number1 > 0 && number2 > 0)
+	for (int i = 0; i < size; i++)
 	{
-		while (number1 > 0)
+		number = arr[i];
+		if (number > 1 && number % 2 != 0 && number % 3 != 0 && number % 5 != 0 && number % 7 != 0 && number % 11 != 0)
 		{
-			sum1 += number1 % 10;
-			number1 /= 10;
-		}
-		while (number2 > 0)
-		{
-			sum2 += number2 % 10;
-			number2 /= 10;
-		}
-		if (sum1 == sum2)
-		{
-			std::cout << "Brojevi " << broj1 << " i " << broj2 << " imaju isti broj znamenki " << sum1 << std::endl;
-		}
-		else
-		{
-			std::cout << "Brojevi " << broj1 << " i " << broj2 << " nemaju isti broj znamenki " << std::endl;
+			std::cout << "Prosti broj je: " << number << std::endl;
+			break;
 		}
 	}
 
